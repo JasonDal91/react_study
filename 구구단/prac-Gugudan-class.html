@@ -15,70 +15,60 @@
     <!--<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>-->
     <script type="text/babel">
       'use strict';
-
-      class GuGUDan extends React.Component {
+      class Gugudan extends React.Component {
         state = {
-          first: Math.ceil(Math.random() * 9),
-          second: Math.ceil(Math.random() * 9),
+          firstWord: Math.ceil(Math.random() * 9),
+          secondWord: Math.ceil(Math.random() * 9),
           value: '',
           result: '',
         };
-
         onSubmit = (e) => {
           e.preventDefault();
           if (
             parseInt(this.state.value) ===
-            this.state.first * this.state.second
+            this.state.firstWord * this.state.secondWord
           ) {
-            this.setState((prevState) => {
+            this.setState((prev) => {
               return {
-                result: '정답: ' + prevState.value,
-                first: Math.ceil(Math.random() * 9),
-                second: Math.ceil(Math.random() * 9),
+                result: '정답' + prev.value,
+                firstWord: Math.ceil(Math.random() * 9),
+                secondWord: Math.ceil(Math.random() * 9),
                 value: '',
               };
             });
-            this.input.focus();
           } else {
             this.setState({
               result: '땡',
               value: '',
             });
-            this.input.focus();
           }
         };
-
-        onChange = (e) => this.setState({ value: e.target.value });
-
-        input;
-
-        onRefInput = (c) => {
-          this.input = c;
+        onChange = (e) => {
+          this.setState({ value: e.target.value });
         };
 
         render() {
           return (
-            <React.Fragment>
+            <div>
               <div>
-                {this.state.first} 곱하기 {this.state.second}는?
+                {this.state.firstWord}곱하기 {this.state.secondWord}는?
               </div>
               <form onSubmit={this.onSubmit}>
                 <input
-                  ref={this.onRefInput}
                   type='number'
                   value={this.state.value}
                   onChange={this.onChange}
                 />
-                <button type='submit'>입력!</button>
+                <button type='submit'>입력</button>
               </form>
               <div>{this.state.result}</div>
-            </React.Fragment>
+            </div>
           );
         }
       }
     </script>
     <script type="text/babel">
-      ReactDOM.createRoot(document.querySelector('#root')).render(<GuGUDan />);
+      ReactDOM.createRoot(document.querySelector('#root')).render(<Gugudan />);
     </script>
   </body>
 </html>
